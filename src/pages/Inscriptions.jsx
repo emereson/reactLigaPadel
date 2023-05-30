@@ -61,6 +61,19 @@ const Inscriptions = () => {
         };
         createOrder();
 
+        const validOrder = () => {
+            const url = `${import.meta.env.REACT_APP_URL_API}/api/v1/event/webhook`;
+
+            axios
+                .post(url, requestData)
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch((err) => console.log(err));
+
+        };
+        validOrder()
+
         const url = `${import.meta.env.REACT_APP_URL_API}/api/v1/inscription/${id}`;
         axios
             .post(url, data)
