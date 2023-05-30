@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import InscriptionsAmerican from '../components/Americano/inscriptionsAmerican'
+import InscriptionsAmerican from '../components/Americano/InscriptionsAmerican'
 import InscriptionsLiga from '../components/Liga/InscriptionsLiga'
 import InscriptionsTorneo from '../components/Torneo.jsx/InscriptionsTorneo'
 
