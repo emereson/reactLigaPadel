@@ -66,11 +66,12 @@ const Inscriptions = () => {
 
             axios
                 .post(url)
-                .then((res) => {
-                    console.log(res.data);
+                .then((response) => {
+                    console.log(response.data.paymentDetails);
                 })
-                .catch((err) => console.log(err));
-
+                .catch((error) => {
+                    console.error(error);
+                });
         };
         validOrder()
 
