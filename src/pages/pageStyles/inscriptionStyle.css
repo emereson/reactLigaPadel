@@ -1,0 +1,247 @@
+.inscription__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7em;
+}
+
+.inscription__background {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
+  z-index: 1;
+}
+
+.inscription__imgcontainer {
+  width: 100%;
+  height: 25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4em;
+  z-index: 2;
+  padding: 3em 1em 3em 1em;
+  background-color: rgb(255, 241, 235);
+}
+
+.inscription__imgcontainer img {
+  width: 12em;
+  height: 12em;
+}
+
+.inscription__imgcontainer h2 {
+  font-size: 1.8em;
+  font-weight: 800;
+  color: #0c0c0c;
+}
+
+.inscription__imgcontainer h3 {
+  color: rgb(202, 36, 36);
+  font-size: 1.4em;
+  padding-left: 1em;
+}
+
+.inscription__imgUl {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.5em;
+  padding-left: 1.7em;
+  gap: 0.5em;
+}
+.inscription__imgLi {
+  display: flex;
+  font-size: 0.75em;
+  font-weight: 800;
+  color: #2b2b2b;
+  gap: 0.5em;
+}
+
+.link__reglas {
+  margin-top: 1em;
+  margin-left: 1em;
+  cursor: pointer;
+  width: 9em;
+  padding: 0.4em;
+  text-align: center;
+  border-radius: 0.5em;
+  font-weight: 600;
+  font-size: 0.9em;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: 1.5px solid #000000;
+  transition: 0.5s;
+}
+
+.link__reglas:hover {
+  background-color: rgb(255, 255, 255);
+  color: #000000;
+  transition: 0.5s;
+}
+
+.inscription__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  z-index: 2;
+  padding: 1;
+}
+
+.inscription__form h2 {
+  color: #151515;
+  z-index: 4;
+  padding-top: 3em;
+  padding-bottom: 1em;
+  text-align: center;
+  width: 100%;
+  font-weight: 800;
+  font-size: 2em;
+}
+.register__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  z-index: 4;
+  color: #151515;
+  justify-content: center;
+  align-items: center;
+  padding-left: 15em;
+  padding-bottom: 1em;
+}
+
+.register__container i {
+  color: #000000;
+}
+
+.register__Player1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.5em;
+}
+.register__Player1 h3 {
+  color: rgb(42, 42, 42);
+  font-weight: 800;
+  padding-left: 0.5em;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+}
+.inscription__div1 {
+  width: 100%;
+  padding-left: 0.5em;
+  padding-top: 0.8em;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.4em;
+  max-width: 500px;
+}
+
+.register__Player2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.5em;
+}
+.register__Player2 h3 {
+  color: rgb(42, 42, 42);
+  padding-left: 0.5em;
+  font-weight: 800;
+  font-size: 1.3em;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+}
+.inscription__div2 {
+  padding-left: 0.5em;
+  padding-top: 0.8em;
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  gap: 0.4em;
+}
+.inscription__label {
+  font-size: 0.75em;
+  font-weight: 500;
+}
+
+.inscription__input {
+  height: 2.7em;
+  width: 25em;
+  font-size: 0.7em;
+  text-align: center;
+  border-radius: 0.4em;
+  border: 1px solid rgba(44, 44, 44, 0.585);
+  color: #151515;
+}
+.inscription__input:hover {
+  background-color: rgba(85, 85, 85, 0.438);
+  transition: 0.3s;
+}
+
+.register__Player2 input:hover {
+  background-color: rgba(85, 85, 85, 0.438);
+  transition: 0.3s;
+}
+.inscription__checkBox {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 0.2em;
+}
+
+.inscription__checkBox h4 {
+  font-size: 0.7em;
+  padding-left: 1em;
+  padding-top: 0.5em;
+}
+
+.inscription__label-checkBox {
+  font-size: 0.7em;
+  padding-left: 1.5em;
+  display: flex;
+  padding-bottom: 0.2em;
+  gap: 0.5em;
+}
+
+input[type='radio'] {
+  margin-top: -0.08em;
+}
+
+.conditions {
+  background-color: #fafaff;
+  color: rgb(52, 52, 52);
+  width: 100%;
+  padding: 2em 1em 1em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.conditions__label {
+  max-width: 800px;
+  font-size: 0.6em;
+  font-weight: 600;
+  display: flex;
+  gap: 2em;
+  padding-top: 1.3em;
+}
+.conditions span {
+  color: rgb(207, 59, 59);
+  margin-left: -1em;
+  margin-right: -0.5em;
+}

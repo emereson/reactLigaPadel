@@ -1,0 +1,164 @@
+.allInfo__container {
+  z-index: 100;
+  width: 100%;
+  height: auto;
+  color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  padding: 1.5em;
+  gap: 8em;
+  background-color: rgb(1, 4, 26);
+  box-shadow: 0 0 0.2em 0.5px rgba(0, 153, 255, 0.294);
+}
+
+.allInfo__whatsapp {
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.allInfo__whatsapp h3 {
+  color: rgb(23, 177, 33);
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.allInfo__whatsapp p {
+  font-size: 0.9em;
+  padding-left: 0.5em;
+  padding-bottom: 1em;
+}
+
+.allInfo__whatsapp-link {
+  color: rgb(23, 177, 33);
+  font-weight: 700;
+}
+.allInfo__whatsapp img {
+  width: 15em;
+  height: 8em;
+  cursor: pointer;
+}
+
+.allInfo__contactus {
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+}
+
+.allInfo__contactus h3 {
+  color: rgb(23, 177, 33);
+  padding-top: 0.5em;
+  padding-bottom: 1.5em;
+}
+
+.allInfo__contactus-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.allInfo__contactus-ul li {
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+.allInfo__contactus-ul li:hover {
+  color: rgb(23, 177, 33);
+}
+.allInfo__contactus-link {
+  color: white;
+}
+
+.allInfo__contactus-link:hover {
+  color: rgb(53, 195, 34);
+}
+
+.allInfo__contactus-facebook {
+  color: white;
+}
+
+.allInfo__contactus-facebook:hover {
+  color: rgb(23, 177, 33);
+}
+
+.bx-envelope:hover {
+  color: rgb(23, 177, 33);
+}
+
+.bx-phone:hover {
+  color: rgb(23, 177, 33);
+}
+
+.allInfo__networks {
+  width: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 1em;
+}
+
+.allInfo__networks h3 {
+  color: rgb(23, 177, 33);
+  padding-top: 0.5em;
+  padding-bottom: 1.5em;
+}
+.allInfo__networks ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-right: 3em;
+}
+
+.allInfo__networks-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.allInfo__networks-link i {
+  z-index: 5;
+  width: 1.85em;
+  height: 1.85em;
+  margin: auto;
+  margin-top: -1.9em;
+  font-size: 2em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: transparent;
+}
+.allInfo__networks-link i:hover {
+  color: rgb(23, 177, 33);
+  background-color: rgba(0, 0, 0, 0.82);
+  border: none;
+}
+.allInfo__networks img {
+  z-index: 1;
+  width: 4em;
+  height: 4em;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+}
+
+.allInfo__networks-link span {
+  color: white;
+  font-weight: 600;
+}
+
+.allInfo__networks-link span:hover {
+  color: rgb(23, 177, 33);
+}
+
+@media (max-width: 1100px) {
+}

@@ -1,0 +1,286 @@
+.header {
+  position: fixed;
+  z-index: 100;
+  height: 8em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(1, 4, 26);
+  box-shadow: 0 0 0.2em 0.5px rgba(0, 153, 255, 0.294);
+}
+
+.header__imgContainer {
+  position: absolute;
+  left: 0;
+  padding: 1em;
+  width: 15em;
+  height: 100%;
+  padding-left: 2em;
+}
+
+.header__img {
+  width: 100%;
+  height: 100%;
+}
+
+.header__nav {
+  width: 100%;
+  display: flex;
+  padding: 1em;
+}
+
+.header__ul {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  gap: 3.5em;
+  padding-left: 3em;
+  padding-top: 2em;
+  font-weight: 800;
+}
+
+.header__link {
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+}
+
+.header__link:hover {
+  color: rgb(23, 177, 33);
+  scale: 1.1;
+  transition: 0.3s;
+}
+
+.header_icons {
+  position: absolute;
+  top: 0.7em;
+  right: 1.5em;
+  display: flex;
+  gap: 0.6em;
+  font-size: 1.6em;
+}
+
+.header__li-events {
+  position: relative;
+  display: inline-block;
+}
+.header__li-events P {
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.header__li-events P:hover {
+  color: rgb(23, 177, 33);
+  transition: 0.3s;
+}
+.header__li-events:hover .header__ul-events {
+  display: block;
+}
+.header__ul-events {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-left: -1.4em;
+  padding: 0;
+  border: 1px solid rgb(23, 177, 33);
+  z-index: 1;
+}
+
+.headerEvents {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(1, 3, 16);
+  padding: 0.5em;
+  width: 8em;
+  border-bottom: 1px solid rgb(23, 177, 33);
+  float: left;
+  cursor: pointer;
+}
+.headerEvents:hover {
+  color: rgb(23, 177, 33);
+}
+.headerEvents p {
+  font-size: 0.9em;
+}
+.headerEvents__american {
+  border-bottom: none;
+}
+.headerEvents ul {
+  position: absolute;
+  z-index: 10;
+  left: 8em;
+  top: -1px;
+  width: 11em;
+  background-color: rgb(1, 3, 16);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(23, 177, 33);
+}
+.header__liga {
+  padding: 0.45em;
+  border-bottom: 1px solid rgb(23, 177, 33);
+  width: 100%;
+}
+.header__liga a {
+  font-size: 0.75em;
+}
+.bxl-facebook-circle {
+  color: rgb(0, 27, 161);
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 1.15em;
+}
+
+.bxl-instagram {
+  color: rgb(163, 0, 178);
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 1.15em;
+}
+
+.bxl-whatsapp {
+  color: rgb(23, 157, 32);
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 1.15em;
+}
+
+.bxl-facebook-circle:hover {
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+  scale: 1.1;
+}
+
+.bxl-instagram:hover {
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+  scale: 1.1;
+}
+
+.bxl-whatsapp:hover {
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+  scale: 1.1;
+}
+.active {
+  color: rgb(23, 177, 33);
+}
+.active2 {
+  color: rgb(23, 177, 33) !important;
+}
+
+@media (max-width: 1300px) {
+  .header {
+    width: 100%;
+    height: 4em;
+  }
+  .header__imgContainer {
+    width: 8em;
+    margin-left: -2em;
+  }
+  .header__nav {
+    transition: all 0.5s;
+    transform: translateX(100%);
+    position: fixed;
+    top: 4em;
+    right: 0;
+    height: 100%;
+    width: 70%;
+  }
+  .header__navMobil {
+    transform: translateX(0);
+    position: fixed;
+    top: 4em;
+    right: 0;
+    height: 100%;
+    width: 70%;
+    max-width: 500px;
+    background-color: rgb(255, 249, 249);
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding-top: 4em;
+    transition: all 0.5s;
+  }
+  .header__link {
+    color: black;
+  }
+  .header__li-events P {
+    color: black;
+  }
+  .header__ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    gap: 1em;
+    height: 100%;
+    justify-content: start;
+  }
+  .header__li-events {
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .header__ul-events {
+    position: unset;
+    margin: 0;
+    border: 1px solid black;
+  }
+  .headerEvents {
+    width: 10em;
+    flex-direction: column;
+    padding: 0;
+    float: none;
+    gap: 0;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid black;
+  }
+  .headerEvents__american {
+    border-bottom: none;
+  }
+  .headerEvents p {
+    padding: 0.6em;
+    font-size: 0.8em;
+  }
+  .headerEvents ul {
+    position: static;
+    width: 100%;
+    border: none;
+    background-color: aliceblue;
+    border-top: 1px solid rgb(0, 0, 0);
+  }
+  .header__liga {
+    font-size: 0.85em;
+    border-bottom: 1px solid black;
+  }
+  .header_icons {
+    padding-top: 4em;
+    position: inherit;
+    justify-content: center;
+    align-items: center;
+  }
+  .header__iconMain {
+    color: aliceblue;
+    position: absolute;
+    top: 0;
+    right: 1em;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header__iconMain i {
+    font-size: 1.8em;
+    cursor: pointer;
+  }
+}

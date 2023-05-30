@@ -1,0 +1,21 @@
+const createEvent = {
+  name: '',
+  subTitle: '',
+  place: '',
+  typeEvent: '',
+  description: '',
+  rules: '',
+  startDateEvent: '',
+  endDateEvent: '',
+  price: '',
+  generalConditions: '',
+  requirements: '',
+  changesCancellations: '',
+  rutPlayerLocked1: '',
+  rutPlayerLocked2: '',
+  rutPlayerLocked3: '',
+  rutPlayerLocked4: '',
+  rutPlayerLocked5: '',
+  coverImg: '',
+};
+export default createEvent;

@@ -1,0 +1,578 @@
+.home__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(13, 15, 28);
+}
+
+.home__img {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(255, 241, 235);
+  max-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home__img span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(1, 2, 15, 0.412);
+  max-height: 1000px;
+}
+
+.home__img img {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(-1);
+}
+
+.home__title {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  max-height: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideIn 1.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home__title-text {
+  width: 100%;
+  max-width: 2000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding-left: 8em;
+}
+
+.home__title h3 {
+  padding-left: 1rem;
+  font-size: 2.7rem;
+  font-weight: 800;
+  color: rgb(255, 255, 255);
+}
+
+.home__title h1 {
+  font-size: 7rem;
+  font-weight: 800;
+  color: rgb(8, 24, 169);
+}
+
+.home__title h2 {
+  padding-left: 1rem;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgb(127, 200, 0);
+}
+
+.home__title h4 {
+  margin-top: 0.5rem;
+  padding-left: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+}
+
+.homeSponsor__container {
+  position: absolute;
+  z-index: 10;
+  margin-bottom: -6em;
+  min-width: 350px;
+  width: 50%;
+  max-width: 1700px;
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  border-radius: 0.5em;
+  padding: 0 1.5em 0 1.5em;
+  display: flex;
+  overflow: hidden;
+  animation: scaleIn 1.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.homeSponsor__carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardHomeSponsor__containerImg {
+  width: 11em;
+  height: 11em;
+}
+
+.cardHomeSponsor__containerImg img {
+  width: 100%;
+  height: 100%;
+}
+/* comienzo de eventos  */
+.cardEven__allContainer {
+  width: 100%;
+}
+.cardEvent__container {
+  width: 100%;
+  height: 100vh;
+  max-height: 1000px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 6em;
+}
+.cardEvent__container-img {
+  width: 30em;
+  height: 45em;
+  margin-left: 1em;
+}
+
+.cardEvent__container2 {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  width: 95%;
+  height: 38em;
+  max-width: 1300px;
+  background-color: rgb(241, 249, 255);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1em 0 0 1em;
+  box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.609);
+}
+
+.cardEvent__container2 h2 {
+  height: 2em;
+  font-size: 1.7em;
+  font-weight: 800;
+  color: rgb(0, 32, 161);
+  z-index: 5;
+}
+
+.cardEvent__carousel {
+  z-index: 5;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding: 0 3em 0 3em;
+  transition: 0.5s;
+  gap: 2em;
+}
+
+.allDiv__btn {
+  z-index: 2;
+  position: absolute;
+  font-size: 2.5em;
+  border-radius: 50%;
+  color: rgb(127, 200, 0);
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.allDivgbtn__left {
+  left: 0.2em;
+}
+
+.allDivgbtn__left:hover {
+  background-color: rgb(127, 200, 0);
+  color: rgb(255, 255, 255);
+  transition: 0.5s;
+}
+.allDivbtn__right {
+  right: 0.2em;
+}
+.allDivbtn__right:hover {
+  background-color: rgb(127, 200, 0);
+  color: rgb(255, 255, 255);
+  transition: 0.5s;
+}
+
+.cardEvent__div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cadEvent__imgContainer {
+  width: 17em;
+  height: 14em;
+  padding: 1em;
+}
+
+.cardEvent__img {
+  width: 80%;
+  margin: auto;
+  height: 100%;
+  border-radius: 0.3em;
+  transition: 0.5s;
+}
+
+.cardEvent__img:hover {
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.cardEvent__h3 {
+  padding-top: 0.5em;
+  font-size: 1em;
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
+  color: rgb(52, 52, 52);
+}
+
+.cardEvent__article {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1em;
+  gap: 0.5em;
+}
+
+.cardEvent__ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.cardEvent__li {
+  font-size: 0.7em;
+  font-weight: 600;
+  color: rgb(72, 72, 72);
+}
+
+.cardEvent__p {
+  cursor: pointer;
+  color: rgb(143, 143, 143);
+  text-decoration: underline;
+  width: auto;
+  font-size: 0.65em;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1em;
+}
+
+.cardEvent__p:hover {
+  color: rgb(127, 200, 0);
+}
+
+.cardEvent__button {
+  cursor: pointer;
+  width: 12em;
+  margin: auto;
+  padding: 0.7em;
+  border-radius: 0.5em;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.7em;
+  background-color: rgb(255, 255, 255);
+  color: rgb(127, 200, 0);
+  border: 2px solid rgb(127, 200, 0);
+  transition: 0.5s;
+}
+
+.cardEvent__button:hover {
+  background-color: rgb(127, 200, 0);
+  color: rgb(255, 255, 255);
+  transition: 0.5s;
+}
+.cardEvent__span {
+  width: 100%;
+  text-align: center;
+  color: grey;
+}
+
+/* comienzo de los calendarios */
+.homeCalendars__allContainer {
+  width: 100%;
+}
+
+.home__calendars {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3em 0 3em 0;
+}
+
+.home__calendars-title {
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 1em;
+  justify-content: center;
+}
+
+.home__calendars-title h3 {
+  display: flex;
+  font-weight: 800;
+  align-items: center;
+  font-size: 2.5em;
+  color: rgb(28, 81, 205);
+  gap: 0.7em;
+}
+
+.home__calendars-title span {
+  color: rgb(127, 200, 0);
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.bxs-tennis-ball {
+  color: rgb(28, 81, 205);
+  font-size: 1.5em;
+  cursor: auto;
+}
+.home__calendars-title h2 {
+  font-weight: 800;
+  color: rgb(127, 200, 0);
+  font-size: 3em;
+}
+
+.home__cardCalendary-container {
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4em;
+  padding: 1.5em;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5em;
+}
+.homeCalendary__span {
+  width: 100%;
+  height: 20em;
+  text-align: center;
+  color: gray;
+  font-weight: 600;
+}
+.cardHomecalendary__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.cardHomecalendary__container h1 {
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  font-weight: 800;
+}
+
+.CardHomecalendary__DivImg {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.CardHomecalendary__DivImg img {
+  width: 15em;
+  height: 17em;
+  border-radius: 0.5em;
+  transition: 0.4s;
+}
+
+.CardHomecalendary__DivImg img:hover {
+  scale: 1.1;
+  transition: 0.4s;
+}
+
+/* comienzo de las galerias  */
+.HomeGalery__allContainer {
+  width: 100%;
+}
+.HomeGalery__container {
+  width: 100%;
+  max-width: 1800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.cardHomeGalery__container {
+  width: 100%;
+  height: 30em;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 0em 4em 0em 4em;
+}
+
+.cardHomeGalery__container h2 {
+  color: rgb(23, 157, 32);
+  padding-bottom: 1em;
+  font-size: 1.8em;
+  font-weight: 800;
+}
+.cardHomeGalery__container i {
+  margin-top: 2.5em;
+}
+
+.cardHomeGalery__containerImg {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  transition: 0.5s;
+}
+.cardHomeGalery__carrusel {
+  display: flex;
+  padding: 0 3em 0 3em;
+  transition: 0.5s;
+}
+
+.cardHomeGalery__Img {
+  width: 18.1em;
+  height: 14em;
+}
+.cardHomeGalery__Img img {
+  width: 100%;
+  height: 100%;
+}
+.cardEvent__container {
+  transform: translateX(100%);
+  opacity: 0;
+  scale: 0.7;
+  transition: all 3s;
+}
+
+.home__calendars {
+  transform: translateX(-100%);
+  opacity: 0;
+  scale: 0.7;
+  transition: all 2s;
+}
+
+.HomeGalery__container {
+  transform: translateX(100%);
+  opacity: 0;
+  scale: 0.7;
+  transition: all 2s;
+}
+
+.fade-in {
+  transform: translateX(0);
+  scale: 1;
+  opacity: 1;
+}
+
+@media (max-width: 1100px) {
+  .home__container {
+  }
+  .home__title {
+    justify-content: start;
+
+    align-items: center;
+  }
+  .home__title-text {
+    scale: 0.6;
+    padding: 0;
+    margin-left: -2em;
+  }
+  .home__title h1 {
+    font-size: 5em;
+  }
+  .homeSponsor__container {
+    display: none;
+  }
+  .cardEvent__container {
+    height: 100%;
+    padding-top: 2em;
+  }
+  .cardEvent__container2 {
+    position: unset;
+    width: 100%;
+    height: auto;
+    border-radius: 0em;
+    padding: 1em;
+  }
+  .cardEvent__container-img {
+    display: none;
+  }
+  .home__calendars {
+    padding: 1em;
+  }
+  .home__calendars-title {
+    scale: 0.7;
+    padding: 0;
+    margin-left: -4em;
+  }
+  .home__calendars-title h3 {
+    width: 100%;
+    justify-content: start;
+    align-items: center;
+  }
+  .cardHomeGalery__container {
+    padding: 2em;
+  }
+  .cardHomeGalery__carrusel {
+    padding: 0;
+  }
+  .cardHomeGalery__Img {
+    width: 19.35em;
+  }
+}

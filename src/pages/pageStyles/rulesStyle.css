@@ -1,0 +1,37 @@
+.eventRules__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 8em;
+  justify-content: center;
+  align-items: center;
+}
+
+.eventRules_containerText {
+  max-width: 1200px;
+  padding: 1.5em;
+}
+
+.eventRules__Text {
+  padding-bottom: 5em;
+}
+.eventRules__Text h1 {
+  color: rgb(188, 11, 11);
+  font-weight: 800;
+  font-size: 1.6em;
+  width: 100%;
+  text-align: center;
+  padding-top: 3em;
+  padding-bottom: 2em;
+  text-decoration: underline;
+}
+.eventRules__Text kbd {
+  white-space: pre-line;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.eventRules__inscription {
+  padding: 2em;
+  padding-bottom: 5em;
+}

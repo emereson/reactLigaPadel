@@ -1,0 +1,117 @@
+.board__container {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  animation: slide-board 1s ease-in-out forwards;
+}
+.board__containerH1 {
+  width: 100%;
+  height: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  background-color: rgb(6, 6, 10);
+  transform: translateX(-100%);
+  animation: slide-board 2s ease-in-out forwards;
+  scale: 0.5;
+}
+.board__container h1 {
+  max-width: 1800px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1.7em;
+  font-weight: 800;
+  padding-left: 2em;
+}
+.board__containerH1 i {
+  font-size: 1em;
+  margin-top: 0.4em;
+  padding-left: 0.5em;
+  color: rgb(255, 255, 255);
+  transition: 0.5s;
+}
+.board__containerH1 h1:hover {
+  color: greenyellow;
+}
+.board__containerH1 i:hover {
+  color: greenyellow;
+  transition: 0.5s;
+}
+.cardBoard__container {
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5em;
+  padding: 2em;
+  padding-top: 5em;
+  transform: translateX(100%);
+  animation: slide-board 2s ease-in-out forwards;
+  scale: 0.5;
+}
+
+@keyframes slide-board {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    scale: 1;
+  }
+}
+
+.cardBoard__events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3em;
+  gap: 2.7em;
+}
+
+.cardBoard__events h2 {
+  font-size: 1.7em;
+  font-weight: 800;
+  color: rgb(47, 47, 47);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.cardBoard__events i {
+  color: rgb(47, 47, 47);
+  font-size: 1em;
+  margin-top: 0.4em;
+  transition: 0.5s;
+}
+.cardBoard__events i:hover {
+  color: greenyellow;
+  transition: 0.5s;
+}
+.cardBoard__imgContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5em;
+}
+
+.cardBoard__imgContainer img {
+  width: 18em;
+  height: 24em;
+  border-radius: 0.5em;
+  transition: 0.5s;
+}
+
+.cardBoard__imgContainer img:hover {
+  scale: 1.05;
+  transition: 0.5s;
+  box-shadow: 0 0 0.5em 0.1px rgb(0, 0, 0);
+}
