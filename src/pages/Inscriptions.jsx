@@ -42,7 +42,7 @@ const Inscriptions = () => {
         }
 
         const createOrder = () => {
-            const url = `${import.meta.env.REACT_APP_URL_API}/api/v1/event/${id}/createOrder`;
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
 
             const requestData = {
                 ...data,
@@ -62,7 +62,7 @@ const Inscriptions = () => {
         createOrder();
 
         const validOrder = () => {
-            const url = `${import.meta.env.REACT_APP_URL_API}/api/v1/event/webhook`;
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
             axios
                 .post(url, requestData)
@@ -74,7 +74,7 @@ const Inscriptions = () => {
         };
         validOrder()
 
-        const url = `${import.meta.env.REACT_APP_URL_API}/api/v1/inscription/${id}`;
+        const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
         axios
             .post(url, data)
             .then((res) => console.log(res.data))
@@ -102,7 +102,7 @@ const Inscriptions = () => {
         return inscription.category1 === "Masculina 2da"
     });
 
-    console.log(filteredInscriptions.length);
+    // console.log(filteredInscriptions.length);
     return (
         <div className="inscription__container">
             <div className="inscription__imgcontainer">
