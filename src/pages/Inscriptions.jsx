@@ -65,7 +65,7 @@ const Inscriptions = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
             axios
-                .post(url, requestData)
+                .post(url)
                 .then((res) => {
                     console.log(res.data);
                 })
