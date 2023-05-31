@@ -53,8 +53,7 @@ const Inscriptions = () => {
                 .post(url, requestData)
                 .then((res) => {
                     console.log(res.data);
-                    window.open(res.data.response.init_point, '_blank');
-                    setInscriptionPayId(res.data.response.id);
+                    window.open(res.data.preferenceId.init_point, '_blank');
                 })
                 .catch((err) => console.log(err));
 
@@ -65,7 +64,7 @@ const Inscriptions = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
             axios
-                .get(url)
+                .post(url)
                 .then((response) => {
                     console.log(response.data.paymentStatus);
 
