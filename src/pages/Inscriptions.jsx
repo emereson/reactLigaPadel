@@ -42,7 +42,7 @@ const Inscriptions = () => {
         }
 
         const createOrder = () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
 
             const requestData = {
                 ...data,
@@ -53,7 +53,7 @@ const Inscriptions = () => {
                 .post(url, requestData)
                 .then((res) => {
                     console.log(res.data);
-                    window.open(res.data.preferenceId.init_point, '_blank');
+                    window.open(res.data.preferenceId.body.init_point, '_blank');
                     // window.location.href = res.data.preferenceId.init_point;
 
                 })
@@ -61,23 +61,6 @@ const Inscriptions = () => {
 
         };
         createOrder();
-
-
-        const validOrder = () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
-
-            axios
-                .post(url)
-                .then((res) => {
-                    console.log(res.data);
-                    // window.location.href = res.data.preferenceId.init_point;
-                    validOrder();
-
-                })
-                .catch((err) => console.log(err));
-
-        };
-        validOrder()
 
 
 
