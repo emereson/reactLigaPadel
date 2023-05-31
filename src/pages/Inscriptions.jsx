@@ -41,7 +41,7 @@ const Inscriptions = () => {
             return;
         }
 
-        const createOrder = async () => {
+        const createOrder = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
 
             const requestData = {
@@ -49,37 +49,36 @@ const Inscriptions = () => {
                 couponCode: discountCoupon,
             };
 
-            try {
-                const res = await axios.post(url, requestData);
-                console.log(res.data);
-                window.open(res.data.preferenceId.init_point, '_blank');
+            axios
+                .post(url, requestData)
+                .then((res) => {
+                    console.log(res.data);
+                    window.open(res.data.preferenceId.init_point, '_blank');
+                    // window.location.href = res.data.preferenceId.init_point;
 
-                await validOrder();
-            } catch (err) {
-                console.log(err);
-            }
+                })
+                .catch((err) => console.log(err));
+
         };
-
-        const validOrder = async () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
-
-            try {
-                const response = await axios.post(url);
-                console.log(response.data.paymentStatus);
-
-                if (response.data.paymentStatus === 'approved') {
-                    console.log('La transacción fue aprobada');
-                    // Realizar la acción correspondiente cuando la transacción está aprobada
-                } else {
-                    console.log('La transacción no fue aprobada');
-                    // Realizar la acción correspondiente cuando la transacción no está aprobada
-                }
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
         createOrder();
+
+
+        const validOrder = () => {
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
+
+            axios
+                .post(url, requestData)
+                .then((res) => {
+                    console.log(res.data);
+                    // window.location.href = res.data.preferenceId.init_point;
+                    validOrder();
+
+                })
+                .catch((err) => console.log(err));
+
+        };
+        validOrder()
+
 
 
         const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
@@ -106,9 +105,9 @@ const Inscriptions = () => {
     const maculina6ta = infoEvent?.event.maculina6ta === 'yes';
     const mixta = infoEvent?.event.mixta === 'yes';
 
-    const filteredInscriptions = infoEvent?.event.inscriptions.filter(inscription => {
-        return inscription.category1 === "Masculina 2da"
-    });
+    // const filteredInscriptions = infoEvent?.event.inscriptions.filter(inscription => {
+    //     return inscription.category1 === "Masculina 2da"
+    // });
 
     // console.log(filteredInscriptions.length);
     return (
