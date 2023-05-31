@@ -65,15 +65,22 @@ const Inscriptions = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
             axios
-                .post(url)
+                .get(url)
                 .then((response) => {
-                    console.log(response.data.paymentDetails);
+                    console.log(response.data.paymentStatus);
+
+                    if (response.data.paymentStatus === 'approved') {
+                        console.log('La transacción fue aprobada');
+                    } else {
+                        console.log('La transacción no fue aprobada');
+                    }
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         };
-        validOrder()
+
+        validOrder();
 
         const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
         axios
