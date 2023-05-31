@@ -54,9 +54,7 @@ const Inscriptions = () => {
                 .then((res) => {
                     console.log(res.data);
                     window.open(res.data.preferenceId.init_point, '_blank');
-
-                    // Llamar a validOrder() después de recibir la respuesta del pago
-                    validOrder();
+                    validOrder(); // Llamar a validOrder inmediatamente después de realizar el pago
                 })
                 .catch((err) => console.log(err));
         };
@@ -81,7 +79,6 @@ const Inscriptions = () => {
                     console.error(error);
                 });
         };
-
         const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
         axios
             .post(url, data)
