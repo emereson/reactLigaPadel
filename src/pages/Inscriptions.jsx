@@ -67,7 +67,7 @@ const Inscriptions = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
 
             axios
-                .post(url, requestData)
+                .post(url)
                 .then((res) => {
                     console.log(res.data);
                     // window.location.href = res.data.preferenceId.init_point;
