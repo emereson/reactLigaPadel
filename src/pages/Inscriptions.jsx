@@ -41,7 +41,7 @@ const Inscriptions = () => {
             return;
         }
 
-        const createOrder = () => {
+        const createOrder = async () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
 
             const requestData = {
@@ -49,36 +49,39 @@ const Inscriptions = () => {
                 couponCode: discountCoupon,
             };
 
-            axios
-                .post(url, requestData)
-                .then((res) => {
-                    console.log(res.data);
-                    window.open(res.data.preferenceId.init_point, '_blank');
-                    validOrder(); // Llamar a validOrder inmediatamente después de realizar el pago
-                })
-                .catch((err) => console.log(err));
+            try {
+                const res = await axios.post(url, requestData);
+                console.log(res.data);
+                window.open(res.data.preferenceId.init_point, '_blank');
+
+                await validOrder();
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        const validOrder = async () => {
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
+
+            try {
+                const response = await axios.post(url);
+                console.log(response.data.paymentStatus);
+
+                if (response.data.paymentStatus === 'approved') {
+                    console.log('La transacción fue aprobada');
+                    // Realizar la acción correspondiente cuando la transacción está aprobada
+                } else {
+                    console.log('La transacción no fue aprobada');
+                    // Realizar la acción correspondiente cuando la transacción no está aprobada
+                }
+            } catch (error) {
+                console.error(error);
+            }
         };
 
         createOrder();
 
-        const validOrder = () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
-            axios
-                .post(url)
-                .then((response) => {
-                    console.log(response.data.paymentStatus);
-
-                    if (response.data.paymentStatus === 'approved') {
-                        console.log('La transacción fue aprobada');
-                    } else {
-                        console.log('La transacción no fue aprobada');
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
         const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
         axios
             .post(url, data)
