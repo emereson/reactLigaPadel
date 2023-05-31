@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import defaultValues from '../../utils/defaultValues';
 import { useNavigate, useParams } from 'react-router-dom';
-import socketIOClient from 'socket.io-client';
 import './pageStyles/inscriptionStyle.css';
 
 const Inscriptions = () => {
@@ -14,7 +13,7 @@ const Inscriptions = () => {
 
     const [infoEvent, setInfoEvent] = useState();
     const [inscriptionPayId, setInscriptionPayId] = useState('');
-    const [aprobPay, setaprobPay] = useState()
+    const [aprobPay, setaprobPay] = useState('')
 
     useEffect(() => {
         const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}`;
@@ -25,18 +24,6 @@ const Inscriptions = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    useEffect(() => {
-        const socket = socketIOClient('https://king-prawn-app-hankr.ondigitalocean.app'); // Reemplaza con la URL de tu servidor backend alojado
-
-        socket.on('pagoFinalizado', (data) => {
-            console.log('Evento de pago finalizado:', data);
-            // Realiza las acciones necesarias con los datos recibidos del evento
-        });
-
-        return () => {
-            socket.disconnect(); // Desconecta el socket cuando el componente se desmonta
-        };
-    }, []);
 
 
     const submit = (data) => {
