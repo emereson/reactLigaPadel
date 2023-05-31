@@ -42,7 +42,7 @@ const Inscriptions = () => {
         }
 
         const createOrder = () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
 
             const requestData = {
                 ...data,
