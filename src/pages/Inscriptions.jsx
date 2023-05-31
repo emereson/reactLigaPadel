@@ -54,11 +54,14 @@ const Inscriptions = () => {
                 .then((res) => {
                     console.log(res.data);
                     window.open(res.data.preferenceId.init_point, '_blank');
-                    // Llamar a la función validOrder después de realizar el pago
+
+                    // Llamar a validOrder() después de recibir la respuesta del pago
                     validOrder();
                 })
                 .catch((err) => console.log(err));
         };
+
+        createOrder();
 
         const validOrder = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/webhook`;
@@ -78,8 +81,6 @@ const Inscriptions = () => {
                     console.error(error);
                 });
         };
-
-        createOrder();
 
         const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
         axios
