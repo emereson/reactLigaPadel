@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import defaultValues from '../../utils/defaultValues';
 import { useNavigate, useParams } from 'react-router-dom';
 import './pageStyles/inscriptionStyle.css';
+import io from 'socket.io-client'
 
 const Inscriptions = () => {
     const { id } = useParams();
@@ -12,8 +13,8 @@ const Inscriptions = () => {
     const navigate = useNavigate();
 
     const [infoEvent, setInfoEvent] = useState();
-    const [inscriptionPayId, setInscriptionPayId] = useState('');
-    const [aprobPay, setaprobPay] = useState('')
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    const [noPay, setnoPay] = useState()
 
     useEffect(() => {
         const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}`;
@@ -26,22 +27,49 @@ const Inscriptions = () => {
 
 
 
+    const socket = io('https://king-prawn-app-hankr.ondigitalocean.app')
+
     const submit = (data) => {
         const { RutPlayer1, RutPlayer2, discountCoupon } = data;
 
         if (
-            [infoEvent?.event.rutPlayerLocked1, infoEvent?.event.rutPlayerLocked2, infoEvent?.event.rutPlayerLocked3, infoEvent?.event.rutPlayerLocked4, infoEvent?.event.rutPlayerLocked5].includes(
-                RutPlayer1
-            ) ||
-            [infoEvent?.event.rutPlayerLocked1, infoEvent?.event.rutPlayerLocked2, infoEvent?.event.rutPlayerLocked3, infoEvent?.event.rutPlayerLocked4, infoEvent?.event.rutPlayerLocked5].includes(
-                RutPlayer2
-            )
+            [
+                infoEvent?.event.rutPlayerLocked1,
+                infoEvent?.event.rutPlayerLocked2,
+                infoEvent?.event.rutPlayerLocked3,
+                infoEvent?.event.rutPlayerLocked4,
+                infoEvent?.event.rutPlayerLocked5,
+            ].includes(RutPlayer1) ||
+            [
+                infoEvent?.event.rutPlayerLocked1,
+                infoEvent?.event.rutPlayerLocked2,
+                infoEvent?.event.rutPlayerLocked3,
+                infoEvent?.event.rutPlayerLocked4,
+                infoEvent?.event.rutPlayerLocked5,
+            ].includes(RutPlayer2)
         ) {
-            alert(
-                'Uno de los ruts ingresados está bloqueado. No se puede proceder con la suscripción.'
-            );
+            alert('Uno de los ruts ingresados está bloqueado. No se puede proceder con la suscripción.');
             return;
         }
+
+        const validCoupon = () => {
+            const usedCoupons = infoEvent?.event.inscriptions.map(inscription => inscription.discountCoupon);
+
+            if (usedCoupons.includes(discountCoupon)) {
+                alert('Cupón de descuento ya ha sido utilizado por este usuario');
+                setnoPay('00000000'); // Reemplaza '00000000' con el valor deseado para noPay
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        const isValidCoupon = validCoupon();
+
+        if (!isValidCoupon) {
+            return;
+        }
+
 
         const createOrder = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
@@ -55,22 +83,51 @@ const Inscriptions = () => {
                 .post(url, requestData)
                 .then((res) => {
                     console.log(res.data);
+                    setnoPay(res.data.free)
                     window.open(res.data.preferenceId.body.init_point, '_blank');
-                    // window.location.href = res.data.preferenceId.init_point;
-
                 })
                 .catch((err) => console.log(err));
 
+            setButtonDisabled(true); // Deshabilitar el botón después de realizar la acción
+
+
         };
+
         createOrder();
 
 
+        socket.on('validPay', (alldata) => {
+            if (alldata.data === 'approved') {
 
-        const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
-        axios
-            .post(url, data)
-            .then((res) => console.log(res.data))
-            .catch((err) => console.log(err));
+                const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
+                axios
+                    .post(url, data)
+                    .then((res) => {
+                        console.log(res.data);
+                        alert('registro exitoso');
+                    })
+                    .catch((err) => console.log(err));
+
+                reset(defaultValues); // Desuscribirse del evento después de recibir la primera emisión
+            }
+            socket.off('validPay');
+        });
+
+        const validNopay = () => {
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
+            console.log(noPay);
+            axios
+                .post(url, data)
+                .then((res) => {
+                    console.log(res.data);
+                    alert('registro exitoso');
+                })
+                .catch((err) => console.log(err));
+
+            reset(defaultValues);
+        }
+        noPay === 2405200 ? validNopay() : ''
+
     };
 
 
@@ -90,11 +147,20 @@ const Inscriptions = () => {
     const maculina6ta = infoEvent?.event.maculina6ta === 'yes';
     const mixta = infoEvent?.event.mixta === 'yes';
 
-    // const filteredInscriptions = infoEvent?.event.inscriptions.filter(inscription => {
-    //     return inscription.category1 === "Masculina 2da"
-    // });
+    const allfilterRegisterCategory1 = (texto) => {
+        const filterCategory1 = infoEvent && infoEvent.event && infoEvent.event.inscriptions
+            ? infoEvent.event.inscriptions.filter(inscription => inscription.category1 === texto)
+            : [];
+        return filterCategory1.length;
+    };
 
-    // console.log(filteredInscriptions.length);
+    const allfilterRegisterCategory2 = (texto) => {
+        const filterCategory2 = infoEvent && infoEvent.event && infoEvent.event.inscriptions
+            ? infoEvent.event.inscriptions.filter(inscription => inscription.category1 === texto)
+            : [];
+        return filterCategory2.length;
+    };
+
     return (
         <div className="inscription__container">
             <div className="inscription__imgcontainer">
@@ -292,40 +358,44 @@ const Inscriptions = () => {
                         <div className="inscription__checkBox">
                             <h4>Categoria de Participación</h4>
                             {
-                                damasA ? <label
-                                    className="inscription__label-checkBox"
-                                    htmlFor="category1"
-                                    form="damasA"
-                                >
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category1')}
-                                        type="radio"
-                                        name="category1"
-                                        value="Damas A"
-                                        id="damasA"
-                                        required
-                                    />
-                                    Damas A
-                                </label>
+                                allfilterRegisterCategory1("Damas A") < 12 ?
+
+                                    damasA ? <label
+                                        className="inscription__label-checkBox"
+                                        htmlFor="category1"
+                                        form="damasA"
+                                    >
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category1')}
+                                            type="radio"
+                                            name="category1"
+                                            value="Damas A"
+                                            id="damasA"
+                                            required
+                                        />
+                                        Damas A
+                                    </label>
+                                        : ''
                                     : ''}
 
-                            {damasB ? (
-                                <label className="inscription__label-checkBox" htmlFor="category1" form="damasB">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category1')}
-                                        type="radio"
-                                        name="category1"
-                                        value="Damas B"
-                                        id="damasB"
-                                        required
-                                    />
-                                    Damas B
-                                </label>
-                            ) : ''}
+                            {
+                                allfilterRegisterCategory1("Damas B") < 12 ? damasB ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category1" form="damasB">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category1')}
+                                            type="radio"
+                                            name="category1"
+                                            value="Damas B"
+                                            id="damasB"
+                                            required
+                                        />
+                                        Damas B
+                                    </label>
+                                ) : '' : ''}
 
-                            {damasC ? (
+                            {allfilterRegisterCategory1("Damas C") < 12 ? damasC ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="damasC">
                                     <input
                                         className="inscription__input-checkBox"
@@ -338,9 +408,9 @@ const Inscriptions = () => {
                                     />
                                     Damas C
                                 </label>
-                            ) : ''}
+                            ) : '' : ''}
 
-                            {damasD ? (
+                            {allfilterRegisterCategory1("Damas D") < 12 ? damasD ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="damasD">
                                     <input
                                         className="inscription__input-checkBox"
@@ -353,9 +423,9 @@ const Inscriptions = () => {
                                     />
                                     Damas D
                                 </label>
-                            ) : ''
+                            ) : '' : ''
                             }
-                            {maculina1ra ? (
+                            {allfilterRegisterCategory1("Masculina 1ra") < 12 ? maculina1ra ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina1ra">
                                     <input
                                         className="inscription__input-checkBox"
@@ -368,9 +438,9 @@ const Inscriptions = () => {
                                     />
                                     Masculina 1ra
                                 </label>
-                            ) : ''
+                            ) : '' : ""
                             }
-                            {maculina2da ? (
+                            {allfilterRegisterCategory1("Masculina 2da") < 12 ? maculina2da ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina2da">
                                     <input
                                         className="inscription__input-checkBox"
@@ -383,9 +453,9 @@ const Inscriptions = () => {
                                     />
                                     Masculina 2da
                                 </label>
-                            ) : ''
+                            ) : '' : ''
                             }
-                            {maculina3ra ? (
+                            {allfilterRegisterCategory1("Masculina 3ra") < 12 ? maculina3ra ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina3ra">
                                     <input
                                         className="inscription__input-checkBox"
@@ -398,9 +468,9 @@ const Inscriptions = () => {
                                     />
                                     Masculina 3ra
                                 </label>
-                            ) : ''}
+                            ) : '' : ''}
 
-                            {maculina4ta ? (
+                            {allfilterRegisterCategory1("Masculina 4ta") < 12 ? maculina4ta ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina4ta">
                                     <input
                                         className="inscription__input-checkBox"
@@ -413,9 +483,9 @@ const Inscriptions = () => {
                                     />
                                     Masculina 4ta
                                 </label>
-                            ) : ''}
+                            ) : '' : ''}
 
-                            {maculina5ta ? (
+                            {allfilterRegisterCategory1("Masculina 5ta") < 12 ? maculina5ta ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina5ta">
                                     <input
                                         className="inscription__input-checkBox"
@@ -428,9 +498,9 @@ const Inscriptions = () => {
                                     />
                                     Masculina 5ta
                                 </label>
-                            ) : ''}
+                            ) : '' : ''}
 
-                            {maculina6ta ? (
+                            {allfilterRegisterCategory1("Masculina 6ta") < 12 ? maculina6ta ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="maculina6ta">
                                     <input
                                         className="inscription__input-checkBox"
@@ -443,8 +513,8 @@ const Inscriptions = () => {
                                     />
                                     Masculina 6ta
                                 </label>
-                            ) : ''}
-                            {mixta ? (
+                            ) : '' : ''}
+                            {allfilterRegisterCategory1("Mixta") < 12 ? mixta ? (
                                 <label className="inscription__label-checkBox" htmlFor="category1" form="mixta">
                                     <input
                                         className="inscription__input-checkBox"
@@ -457,7 +527,7 @@ const Inscriptions = () => {
                                     />
                                     Mixta
                                 </label>
-                            ) : ''}
+                            ) : '' : ''}
                         </div>
                         <div className="inscription__checkBox">
                             <h4>¿En Que Club Juegas Regularmente?:</h4>
@@ -796,7 +866,7 @@ const Inscriptions = () => {
                         </div>
                         <div className="inscription__checkBox">
                             <h4>Categoria de Participación</h4>
-                            {
+                            {allfilterRegisterCategory2("Damas A") < 12 ?
                                 damasA ? <label
                                     className="inscription__label-checkBox"
                                     htmlFor="category2"
@@ -813,156 +883,166 @@ const Inscriptions = () => {
                                     />
                                     Damas A
                                 </label>
-                                    : ''}
+                                    : '' : ''}
 
-                            {damasB ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="damasB">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Damas B"
-                                        id="damasB"
-                                        required
-                                    />
-                                    Damas B
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Damas B") < 12 ?
+                                damasB ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="damasB">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Damas B"
+                                            id="damasB"
+                                            required
+                                        />
+                                        Damas B
+                                    </label>
+                                ) : '' : ''}
 
-                            {damasC ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="damasC">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Damas C"
-                                        id="damasC"
-                                        required
-                                    />
-                                    Damas C
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Damas C") < 12 ?
+                                damasC ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="damasC">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Damas C"
+                                            id="damasC"
+                                            required
+                                        />
+                                        Damas C
+                                    </label>
+                                ) : '' : ''}
 
-                            {damasD ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="damasD">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Damas D"
-                                        id="damasD"
-                                        required
-                                    />
-                                    Damas D
-                                </label>
-                            ) : ''
+                            {allfilterRegisterCategory2("Damas D") < 12 ?
+                                damasD ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="damasD">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Damas D"
+                                            id="damasD"
+                                            required
+                                        />
+                                        Damas D
+                                    </label>
+                                ) : '' : ''
                             }
-                            {maculina1ra ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina1ra">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 1ra"
-                                        id="maculina1ra"
-                                        required
-                                    />
-                                    Masculina 1ra
-                                </label>
-                            ) : ''
+                            {allfilterRegisterCategory2("Masculina 1ra") < 12 ?
+                                maculina1ra ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina1ra">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 1ra"
+                                            id="maculina1ra"
+                                            required
+                                        />
+                                        Masculina 1ra
+                                    </label>
+                                ) : '' : ''
                             }
-                            {maculina2da ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina2da">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 2da"
-                                        id="maculina2da"
-                                        required
-                                    />
-                                    Masculina 2da
-                                </label>
-                            ) : ''
+                            {allfilterRegisterCategory2("Masculina 2da") < 12 ?
+                                maculina2da ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina2da">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 2da"
+                                            id="maculina2da"
+                                            required
+                                        />
+                                        Masculina 2da
+                                    </label>
+                                ) : '' : ''
                             }
-                            {maculina3ra ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina3ra">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 3ra"
-                                        id="maculina3ra"
-                                        required
-                                    />
-                                    Masculina 3ra
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Masculina 3ra") < 12 ?
+                                maculina3ra ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina3ra">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 3ra"
+                                            id="maculina3ra"
+                                            required
+                                        />
+                                        Masculina 3ra
+                                    </label>
+                                ) : '' : ''}
 
-                            {maculina4ta ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina4ta">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 4ta"
-                                        id="maculina4ta"
-                                        required
-                                    />
-                                    Masculina 4ta
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Masculina 4ta") < 12 ?
+                                maculina4ta ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina4ta">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 4ta"
+                                            id="maculina4ta"
+                                            required
+                                        />
+                                        Masculina 4ta
+                                    </label>
+                                ) : '' : ''}
 
-                            {maculina5ta ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina5ta">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 5ta"
-                                        id="maculina5ta"
-                                        required
-                                    />
-                                    Masculina 5ta
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Masculina 5ta") < 12 ?
+                                maculina5ta ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina5ta">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 5ta"
+                                            id="maculina5ta"
+                                            required
+                                        />
+                                        Masculina 5ta
+                                    </label>
+                                ) : '' : ''}
 
-                            {maculina6ta ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="maculina6ta">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Masculina 6ta"
-                                        id="maculina6ta"
-                                        required
-                                    />
-                                    Masculina 6ta
-                                </label>
-                            ) : ''}
-                            {mixta ? (
-                                <label className="inscription__label-checkBox" htmlFor="category2" form="mixta">
-                                    <input
-                                        className="inscription__input-checkBox"
-                                        {...register('category2')}
-                                        type="radio"
-                                        name="category2"
-                                        value="Mixta"
-                                        id="mixta"
-                                        required
-                                    />
-                                    Mixta
-                                </label>
-                            ) : ''}
+                            {allfilterRegisterCategory2("Masculina 6ta") < 12 ?
+                                maculina6ta ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="maculina6ta">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Masculina 6ta"
+                                            id="maculina6ta"
+                                            required
+                                        />
+                                        Masculina 6ta
+                                    </label>
+                                ) : '' : ''}
+                            {allfilterRegisterCategory2("Mixta") < 12 ?
+                                mixta ? (
+                                    <label className="inscription__label-checkBox" htmlFor="category2" form="mixta">
+                                        <input
+                                            className="inscription__input-checkBox"
+                                            {...register('category2')}
+                                            type="radio"
+                                            name="category2"
+                                            value="Mixta"
+                                            id="mixta"
+                                            required
+                                        />
+                                        Mixta
+                                    </label>
+                                ) : '' : ''}
                         </div>
                         <div className="inscription__checkBox">
                             <h4>¿En Que Club Juegas Regularmente?:</h4>
@@ -1176,7 +1256,7 @@ const Inscriptions = () => {
                     <input type="text" {...register('discountCoupon')} />
 
                     {/* Botón para enviar el formulario de inscripción */}
-                    <button type="submit">Realizar Pago</button>
+                    <button type='submit' disabled={buttonDisabled}>Realizar Pago</button>
                 </div>
             </form>
         </div>
