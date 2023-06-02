@@ -152,6 +152,7 @@
 .cardHomeSponsor__containerImg img {
   width: 100%;
   height: 100%;
+  transform: none;
 }
 /* comienzo de eventos  */
 .cardEven__allContainer {
