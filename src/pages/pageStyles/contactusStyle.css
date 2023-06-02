@@ -21,7 +21,7 @@
 }
 
 .contactus__fronImg {
-  width: 60%;
+  width: 40vw;
   min-width: 360px;
   height: 25em;
 }
@@ -116,4 +116,19 @@
   color: aliceblue;
   border: 1px solid aliceblue;
   transition: 0.5s;
+}
+
+@media (max-width: 1300px) {
+  .contactus__container {
+    padding-top: 4em;
+  }
+  .contactus__fronImg {
+    width: 80%;
+  }
+}
+
+@media (max-width: 800px) {
+  .contactus__fronImg {
+    width: 100%;
+  }
 }
