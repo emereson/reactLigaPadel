@@ -526,13 +526,21 @@
   }
   .home__title {
     justify-content: start;
-
     align-items: center;
+  }
+  .home__img {
+    height: 50vh;
+  }
+  .home__title {
+    height: 50vh;
   }
   .home__title-text {
     scale: 0.6;
     padding: 0;
     margin-left: -2em;
+  }
+  .home__img span {
+    height: 50vh;
   }
   .home__title h1 {
     font-size: 5em;

@@ -164,4 +164,7 @@
   .allInscription__Img2.loaded {
     opacity: 0;
   }
+  .allInscription__container {
+    padding-top: 4em;
+  }
 }
