@@ -1,0 +1,44 @@
+.loaderPage__container {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(1, 4, 26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: 2s;
+}
+
+.close__loader {
+  opacity: 0;
+  z-index: -100;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(1, 4, 26);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 2s;
+}
+
+.loaderPage__img {
+  width: 20em;
+  animation: slide-loader 3s ease-in-out forwards;
+}
+
+@keyframes slide-loader {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  60% {
+    scale: 1.2;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}

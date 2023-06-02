@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 const CardInscriptionTorneo = ({ inscriptionTorneo }) => {
     const navigate = useNavigate()
 
-
     const clickInformation = () => {
-        navigate(`/eventInformation/${inscriptionTorneo.id}`)
+        navigate(`/rulesEvent/${inscriptionTorneo.id}`)
     }
+
 
     const clickInscription = () => {
         navigate(`/inscription/${inscriptionTorneo.id}`)

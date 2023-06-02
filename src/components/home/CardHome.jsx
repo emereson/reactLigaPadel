@@ -12,7 +12,7 @@ const CardHome = ({ event, imgSelected }) => {
     }
 
     const clickInformation = () => {
-        navigate(`/eventInformation/${event.id}`)
+        navigate(`/rulesEvent/${event.id}`)
     }
 
     const styleMovent = {

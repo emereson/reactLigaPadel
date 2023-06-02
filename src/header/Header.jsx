@@ -203,7 +203,7 @@ function Header() {
             <div className='header__iconMain'>
                 {
                     closeMain ?
-                        <i className='bx bxs-grid-alt ' onClick={handleMain}></i>
+                        <i className='bx bx-menu' onClick={handleMain}></i>
                         :
                         <i className='bx bxs-x-circle' onClick={() => { setcloseMain(true) }} ></i>
                 }

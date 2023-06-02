@@ -6,7 +6,7 @@ const CardInscriptionsAmerican = ({ inscriptionAmerican }) => {
 
 
     const clickInformation = () => {
-        navigate(`/eventInformation/${inscriptionAmerican.id}`)
+        navigate(`/rulesEvent/${inscriptionAmerican.id}`)
     }
 
     const clickInscription = () => {

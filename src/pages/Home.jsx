@@ -32,7 +32,6 @@ const Home = () => {
         fetchData(calendaryUrl, setHomeCalendars);
         fetchData(galleryUrl, setHomeGalleries);
         fetchData(sponsorUrl, setHomeSponsors);
-        console.log(eventUrl);
     }, []);
     const handlePrevius = () => {
         setImgSelected(imgSelected - 1)

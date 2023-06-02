@@ -1,20 +1,21 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import defaultValues from '../../utils/defaultValues';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './pageStyles/inscriptionStyle.css';
 import io from 'socket.io-client'
+import emailjs from '@emailjs/browser';
 
 const Inscriptions = () => {
     const { id } = useParams();
+    const formRef = useRef();
 
     const { register, handleSubmit, reset } = useForm();
     const navigate = useNavigate();
 
     const [infoEvent, setInfoEvent] = useState();
     const [buttonDisabled, setButtonDisabled] = useState(false);
-    const [noPay, setnoPay] = useState()
 
     useEffect(() => {
         const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}`;
@@ -25,12 +26,41 @@ const Inscriptions = () => {
             .catch((err) => console.log(err));
     }, []);
 
-
-
     const socket = io('https://king-prawn-app-hankr.ondigitalocean.app')
 
     const submit = (data) => {
         const { RutPlayer1, RutPlayer2, discountCoupon } = data;
+
+        // Función para validar el RUT
+        const isValidRut = (rut) => {
+            if (typeof rut !== 'string') {
+                return false;
+            }
+
+            const rutRegex = /^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$/;
+            if (!rutRegex.test(rut)) {
+                return false;
+            }
+            rut = rut.replace(/\./g, '').replace(/-/g, '');
+            const verificationDigit = rut.slice(-1);
+            const rutNumber = rut.slice(0, -1);
+            let sum = 0;
+            let multiplier = 2;
+
+            for (let i = rutNumber.length - 1; i >= 0; i--) {
+                sum += parseInt(rutNumber.charAt(i)) * multiplier;
+                multiplier = multiplier === 7 ? 2 : multiplier + 1;
+            }
+
+            const expectedDigit = 11 - (sum % 11);
+            const calculatedDigit = expectedDigit === 11 ? '0' : expectedDigit === 10 ? 'K' : expectedDigit.toString();
+
+            return verificationDigit === calculatedDigit;
+        };
+        if (isValidRut(RutPlayer1) || isValidRut(RutPlayer2)) {
+            alert('Uno de los RUT ingresados no es válido.');
+            return;
+        }
 
         if (
             [
@@ -53,9 +83,11 @@ const Inscriptions = () => {
         }
 
         const validCoupon = () => {
-            const usedCoupons = infoEvent?.event.inscriptions.map(inscription => inscription.discountCoupon);
+            const usedCoupons = infoEvent?.event.inscriptions
+                .map(inscription => inscription.discountCoupon)
+                .filter(coupon => coupon !== '')
 
-            if (usedCoupons.includes(discountCoupon)) {
+            if (usedCoupons && usedCoupons.includes(discountCoupon)) {
                 alert('Cupón de descuento ya ha sido utilizado por este usuario');
                 setnoPay('00000000'); // Reemplaza '00000000' con el valor deseado para noPay
                 return false;
@@ -70,6 +102,20 @@ const Inscriptions = () => {
             return;
         }
 
+        const validNopay = () => {
+            const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
+            emailJsNotificaion()
+            axios
+                .post(url, data)
+                .then((res) => {
+                    console.log(res.data);
+                    alert('registro exitoso');
+                    window.location.reload();
+                })
+                .catch((err) => console.log(err));
+
+            reset(defaultValues);
+        }
 
         const createOrder = () => {
             const url = `${import.meta.env.VITE_URL_API}/api/v1/event/${id}/createOrder`;
@@ -83,21 +129,32 @@ const Inscriptions = () => {
                 .post(url, requestData)
                 .then((res) => {
                     console.log(res.data);
-                    setnoPay(res.data.free)
+                    res.data.free === 240529815613 ? validNopay() : ''
                     window.open(res.data.preferenceId.body.init_point, '_blank');
                 })
                 .catch((err) => console.log(err));
 
-            setButtonDisabled(true); // Deshabilitar el botón después de realizar la acción
-
-
+            setButtonDisabled(true)
         };
 
         createOrder();
+        const emailJsNotificaion = () => {
+            emailjs.init('z1GpRuktFvST8rLqT');
 
+            emailjs
+                .sendForm('service_5k8i97v', 'template_ew1c2bo', formRef.current, 'z1GpRuktFvST8rLqT')
+                .then((response) => {
+                    console.log('Email enviado correctamente', response);
+                })
+                .catch((error) => {
+                    console.error('Error al enviar el correo electrónico', error);
+                });
+
+        }
 
         socket.on('validPay', (alldata) => {
             if (alldata.data === 'approved') {
+                emailJsNotificaion()
 
                 const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
                 axios
@@ -105,28 +162,13 @@ const Inscriptions = () => {
                     .then((res) => {
                         console.log(res.data);
                         alert('registro exitoso');
+                        setButtonDisabled(false);
+                        window.location.reload();
                     })
                     .catch((err) => console.log(err));
-
-                reset(defaultValues); // Desuscribirse del evento después de recibir la primera emisión
             }
             socket.off('validPay');
         });
-
-        const validNopay = () => {
-            const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
-            console.log(noPay);
-            axios
-                .post(url, data)
-                .then((res) => {
-                    console.log(res.data);
-                    alert('registro exitoso');
-                })
-                .catch((err) => console.log(err));
-
-            reset(defaultValues);
-        }
-        noPay === 2405200 ? validNopay() : ''
 
     };
 
@@ -179,7 +221,7 @@ const Inscriptions = () => {
                     </ul>
                 </div>
             </div>
-            <form className="inscription__form" onSubmit={handleSubmit(submit)}>
+            <form className="inscription__form" ref={formRef} onSubmit={handleSubmit(submit)}>
                 <h2>INSCRIBIRME</h2>
                 <div className="register__container">
                     <div className="register__Player1">
@@ -220,7 +262,6 @@ const Inscriptions = () => {
                             <input
                                 className="inscription__input"
                                 {...register('RutPlayer1')}
-                                type="number"
                                 id="RutPlayer1"
                                 required
                                 placeholder="Rut:"
@@ -729,7 +770,6 @@ const Inscriptions = () => {
                             <input
                                 className="inscription__input"
                                 {...register('RutPlayer2')}
-                                type="number"
                                 id="RutPlayer2"
                                 required
                                 placeholder="Rut :"
@@ -1251,12 +1291,21 @@ const Inscriptions = () => {
                         />
                         Declaro haber leido y estar de acuerdo con el Reglamento y su aplicación en la Liga
                     </label>
+                    <div className='inscription__divAllPay'>
+                        <div className='inscription__divCoupon'>
+                            <label className='inscription__labelCoupon' >Cupón de Descuento</label>
+                            <input className='inscription__inputCoupon' type="text" {...register('discountCoupon')} placeholder='Cupon' />
 
-                    <label>Cupón de Descuento</label>
-                    <input type="text" {...register('discountCoupon')} />
+                        </div>
+                        <div>
 
-                    {/* Botón para enviar el formulario de inscripción */}
-                    <button type='submit' disabled={buttonDisabled}>Realizar Pago</button>
+                            <button className='inscription__buttonPay' type='submit' disabled={buttonDisabled}>{buttonDisabled ? 'Pago en Proceso' : 'Realizar pago'}</button>
+                        </div>
+                    </div>
+                    <div className='iscription__contacts'>
+                        <p>tuvo problemas con la suscripcion contactanos haciendo </p>
+                        <Link className='iscription__contacts-Link' to='https://api.whatsapp.com/send?phone=56987642187' target='_blank'> click aqui </Link>
+                    </div>
                 </div>
             </form>
         </div>

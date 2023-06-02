@@ -6,7 +6,7 @@ const CardInscriptionLiga = ({ inscriptionLiga }) => {
 
 
     const clickInformation = () => {
-        navigate(`/eventInformation/${inscriptionLiga.id}`)
+        navigate(`/rulesEvent/${inscriptionLiga.id}`)
     }
 
     const clickInscription = () => {

@@ -6,15 +6,17 @@
   justify-content: center;
   align-items: center;
   padding-top: 7em;
+  animation: slide-inscription 2s ease-in-out forwards;
 }
 
-.inscription__background {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  max-height: 1000px;
-  z-index: 1;
+@keyframes slide-inscription {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .inscription__imgcontainer {
@@ -27,22 +29,23 @@
   gap: 4em;
   z-index: 2;
   padding: 3em 1em 3em 1em;
-  background-color: rgb(255, 241, 235);
+  background-color: rgb(15, 15, 23);
 }
 
 .inscription__imgcontainer img {
   width: 12em;
   height: 12em;
+  border-radius: 0.4em;
 }
 
 .inscription__imgcontainer h2 {
   font-size: 1.8em;
   font-weight: 800;
-  color: #0c0c0c;
+  color: #ffffff;
 }
 
 .inscription__imgcontainer h3 {
-  color: rgb(202, 36, 36);
+  color: #4eb11c;
   font-size: 1.4em;
   padding-left: 1em;
 }
@@ -58,7 +61,7 @@
   display: flex;
   font-size: 0.75em;
   font-weight: 800;
-  color: #2b2b2b;
+  color: #ffffff;
   gap: 0.5em;
 }
 
@@ -72,15 +75,15 @@
   border-radius: 0.5em;
   font-weight: 600;
   font-size: 0.9em;
-  background-color: #000000;
+  background-color: #4eb11c;
   color: rgb(255, 255, 255);
-  border: 1.5px solid #000000;
+  border: 1.5px solid #4eb11c;
   transition: 0.5s;
 }
 
 .link__reglas:hover {
   background-color: rgb(255, 255, 255);
-  color: #000000;
+  color: #4eb11c;
   transition: 0.5s;
 }
 
@@ -244,4 +247,88 @@ input[type='radio'] {
   color: rgb(207, 59, 59);
   margin-left: -1em;
   margin-right: -0.5em;
+}
+
+.inscription__divAllPay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3em;
+  justify-content: center;
+  align-items: end;
+  padding: 2em;
+}
+
+.inscription__divCoupon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding-bottom: 0.4em;
+}
+
+.inscription__labelCoupon {
+  font-size: 0.8em;
+  font-weight: 700;
+}
+
+.inscription__inputCoupon {
+  background-color: #070329;
+  color: rgb(0, 194, 45);
+  border: none;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  text-align: center;
+  width: 10em;
+}
+
+.inscription__buttonPay {
+  padding: 0.8em 1.5em 0.8em 1.5em;
+  font-weight: 700;
+  font-size: 1em;
+  border-radius: 0.5em;
+  background-color: #070329;
+  color: rgb(0, 194, 45);
+  cursor: pointer;
+  border: 1.5px solid #070329;
+  transition: 0.5s;
+}
+
+.inscription__buttonPay:hover {
+  background-color: white;
+  color: rgb(0, 194, 45);
+  transition: 0.5s;
+}
+.iscription__contacts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+.iscription__contacts-Link {
+  color: #000000;
+  border-bottom: 0.5px solid black;
+}
+@media (max-width: 1300px) {
+  .inscription__container {
+    padding-top: 4em;
+  }
+  .register__container {
+    padding: 1em;
+  }
+  .inscription__imgcontainer {
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .inscription__imgUl {
+    padding: 1em;
+    justify-content: center;
+    align-items: center;
+  }
+  .inscription__divAllPay {
+    gap: 1em;
+  }
 }

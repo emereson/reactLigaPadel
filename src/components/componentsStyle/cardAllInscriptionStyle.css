@@ -158,3 +158,10 @@
   padding: 0.8em;
   width: 10em;
 }
+
+@media (max-width: 1300px) {
+  .allInscription__Img1.loaded,
+  .allInscription__Img2.loaded {
+    opacity: 0;
+  }
+}

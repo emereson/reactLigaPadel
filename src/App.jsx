@@ -5,7 +5,6 @@ import ContactUs from './pages/ContactUs'
 import Sponsors from './pages/Sponsors'
 import AboutUs from './pages/AboutUs'
 import Home from './pages/Home'
-import EventInformation from './pages/EventInformation'
 import Rules from './pages/Rules'
 import AllInfo from './pages/AllInfo'
 import AllInscriptions from './pages/AllInscriptions'
@@ -26,6 +25,7 @@ import BoardAmerican from './components/Americano/BoardAmerican'
 import CalendaryAmerican from './components/Americano/CalendaryAmerican'
 import ResultsAmerican from './components/Americano/ResultsAmerican'
 import { useEffect } from 'react'
+import LoaderPage from './pages/LoaderPage'
 
 
 const ScrollToTop = () => {
@@ -71,11 +71,10 @@ function App() {
         <Route path='/sponsors' element={<Sponsors />} />
         <Route path='/allInscriptions' element={<AllInscriptions />} />
         <Route path='/inscription/:id' element={<Inscriptions />} />
-        <Route path='/eventInformation/:id' element={<EventInformation />} />
         <Route path='/rulesEvent/:id' element={<Rules />} />
-
       </Routes>
       <AllInfo />
+      <LoaderPage />
     </div>
   )
 }
