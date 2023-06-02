@@ -28,7 +28,7 @@ const AllInfo = () => {
                             <div>
                                 <i className='bx bxl-facebook-circle' ></i>
                             </div>
-                            <span>Liga de Padel Curaum</span>
+                            <span>Liga de Padel Curauma</span>
                         </Link>
                     </li>
                     <li>
@@ -36,7 +36,7 @@ const AllInfo = () => {
                             <div>
                                 <i className='bx bxl-instagram' ></i>
                             </div>
-                            <span>Liga de Padel Curaum</span>
+                            <span>Liga de Padel Curauma</span>
                         </Link>
                     </li>
                 </ul>
