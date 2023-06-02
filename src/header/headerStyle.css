@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(4, 7, 35);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 0 0.2em 0.5px rgba(0, 153, 255, 0.294);
 }
 
@@ -44,7 +44,7 @@
 
 .header__link {
   font-size: 0.8rem;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
 }
 
@@ -69,7 +69,7 @@
 }
 .header__li-events P {
   font-size: 0.8rem;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
   cursor: pointer;
 }
@@ -147,26 +147,26 @@
 }
 
 .bxl-whatsapp {
-  color: rgb(23, 157, 32);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
   cursor: pointer;
   font-size: 1.15em;
 }
 
 .bxl-facebook-circle:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
   scale: 1.1;
 }
 
 .bxl-instagram:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
   scale: 1.1;
 }
 
 .bxl-whatsapp:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   transition: 0.3s;
   scale: 1.1;
 }
@@ -203,7 +203,7 @@
     height: 100%;
     width: 70%;
     max-width: 500px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     display: flex;
     justify-content: center;
     align-items: start;
@@ -244,7 +244,7 @@
     padding: 0;
     float: none;
     gap: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     border-bottom: 1px solid black;
   }
   .headerEvents__american {
@@ -258,7 +258,7 @@
     position: static;
     width: 100%;
     border: none;
-    background-color: aliceblue;
+    background-color: rgb(0, 0, 0);
     border-top: 1px solid rgb(0, 0, 0);
   }
   .header__liga {
@@ -272,7 +272,7 @@
     align-items: center;
   }
   .header__iconMain {
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     position: absolute;
     top: 0;
     right: 1em;
