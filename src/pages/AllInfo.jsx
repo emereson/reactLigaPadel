@@ -26,17 +26,14 @@ const AllInfo = () => {
                     <li>
                         <Link className='allInfo__networks-link' to='https://www.facebook.com/profile.php?id=100092261211805&mibextid=ZbWKwL' target='_blank'>
                             <div>
-
-                                <img src="../logoPadel.png" alt="" />
                                 <i className='bx bxl-facebook-circle' ></i>
                             </div>
                             <span>Liga de Padel Curaum</span>
                         </Link>
                     </li>
                     <li>
-                        <Link className='allInfo__networks-link' to='https://www.instagram.com/ligapadelcurauma/'  target='_blank'>
+                        <Link className='allInfo__networks-link' to='https://www.instagram.com/ligapadelcurauma/' target='_blank'>
                             <div>
-                                <img src="../logoPadel.png" alt="" />
                                 <i className='bx bxl-instagram' ></i>
                             </div>
                             <span>Liga de Padel Curaum</span>

@@ -2,14 +2,14 @@
   z-index: 100;
   width: 100%;
   height: auto;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: start;
   flex-wrap: wrap;
   padding: 1.5em;
   gap: 8em;
-  background-color: rgb(1, 4, 26);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 0 0.2em 0.5px rgba(0, 153, 255, 0.294);
 }
 
@@ -74,7 +74,7 @@
   color: rgb(23, 177, 33);
 }
 .allInfo__contactus-link {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .allInfo__contactus-link:hover {
@@ -82,7 +82,7 @@
 }
 
 .allInfo__contactus-facebook {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .allInfo__contactus-facebook:hover {
@@ -130,13 +130,12 @@
   width: 1.85em;
   height: 1.85em;
   margin: auto;
-  margin-top: -1.9em;
   font-size: 2em;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: transparent;
+  color: black;
 }
 .allInfo__networks-link i:hover {
   color: rgb(23, 177, 33);
@@ -152,7 +151,7 @@
 }
 
 .allInfo__networks-link span {
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 600;
 }
 
