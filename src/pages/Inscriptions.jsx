@@ -215,7 +215,7 @@ const Inscriptions = () => {
                             LUGAR: <p>{infoEvent?.event.place}</p>
                         </li>
                         <li className="inscription__imgLi">
-                            FECHA DE INICIO : <p>{infoEvent?.event.endDateEvent}</p>
+                            FECHA DE INICIO : <p>{infoEvent?.event.startDateEvent}</p>
                         </li>
                         <li className='link__reglas' onClick={clickInformation}>Reglamento</li>
                     </ul>
@@ -673,7 +673,7 @@ const Inscriptions = () => {
                                     id="Revéz"
                                     required
                                 />
-                                Revéz
+                                Revés
                             </label>
 
                             <label
@@ -1187,7 +1187,7 @@ const Inscriptions = () => {
                                     id="Revéz"
                                     required
                                 />
-                                Revéz
+                                Revés
                             </label>
 
                             <label

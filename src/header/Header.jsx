@@ -55,12 +55,12 @@ function Header() {
             <nav className={closeMain ? 'header__nav' : 'header__navMobil'}>
                 <ul className="header__ul">
                     <li className="header__li">
-                        <Link className={`header__link ${isActive('/')}`} to="/" href="#inicio">
+                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/')}`} to="/" href="#inicio">
                             INICIO
                         </Link>
                     </li>
                     <li className="header__li">
-                        <Link className={`header__link ${isActive('/allInscriptions')}`} to="/allInscriptions">
+                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/allInscriptions')}`} to="/allInscriptions">
                             INSCRIPCIONES
                         </Link>
                     </li>
@@ -76,28 +76,28 @@ function Header() {
                                     </p>
                                 )}
                                 <ul style={deployLiga ? styleEvents : styleNone}>
-                                    <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/liga/allLigas')}`} to="/liga/allLigas">
+                                    <li className="header__liga" >
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/liga/allLigas')}`} to="/liga/allLigas">
                                             Todas las ligas
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/liga/galeryLiga')}`} to="/liga/galeryLiga">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/liga/galeryLiga')}`} to="/liga/galeryLiga">
                                             Galeria
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/liga/boardLiga')}`} to="/liga/boardLiga">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/liga/boardLiga')}`} to="/liga/boardLiga">
                                             Tabla de ligas
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/liga/calendaryLiga')}`} to="/liga/calendaryLiga">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/liga/calendaryLiga')}`} to="/liga/calendaryLiga">
                                             Calendario
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/liga/resultsLiga')}`} to="/liga/resultsLiga">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/liga/resultsLiga')}`} to="/liga/resultsLiga">
                                             Resultados
                                         </Link>
                                     </li>
@@ -113,27 +113,27 @@ function Header() {
                                 )}
                                 <ul style={deployTorneo ? styleEvents : styleNone}>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/torneo/allTorneos')}`} to="/torneo/allTorneos">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/torneo/allTorneos')}`} to="/torneo/allTorneos">
                                             Todas los Torneos
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/torneo/galeryTorneo')}`} to="/torneo/galeryTorneo">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/torneo/galeryTorneo')}`} to="/torneo/galeryTorneo">
                                             Galeria
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/torneo/boardTorneo')}`} to="/torneo/boardTorneo">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/torneo/boardTorneo')}`} to="/torneo/boardTorneo">
                                             Tabla de Torneo
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/torneo/calendaryTorneo')}`} to="/torneo/calendaryTorneo">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/torneo/calendaryTorneo')}`} to="/torneo/calendaryTorneo">
                                             Calendario
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/torneo/resultsTorneo')}`} to="/torneo/resultsTorneo">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/torneo/resultsTorneo')}`} to="/torneo/resultsTorneo">
                                             Resultados
                                         </Link>
                                     </li>
@@ -149,27 +149,27 @@ function Header() {
                                 )}
                                 <ul style={deployAmericano ? styleEvents : styleNone}>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/americano/allAmericanos')}`} to="/americano/allAmericanos">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/americano/allAmericanos')}`} to="/americano/allAmericanos">
                                             Todas los Americanos
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/americano/galeryAmericano')}`} to="/americano/galeryAmericano">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/americano/galeryAmericano')}`} to="/americano/galeryAmericano">
                                             Galeria
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/americano/boardAmericano')}`} to="/americano/boardAmericano">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/americano/boardAmericano')}`} to="/americano/boardAmericano">
                                             Tabla de Americano
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/americano/calendaryAmericano')}`} to="/americano/calendaryAmericano">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/americano/calendaryAmericano')}`} to="/americano/calendaryAmericano">
                                             Calendario
                                         </Link>
                                     </li>
                                     <li className="header__liga">
-                                        <Link className={`header__link ${isActive('/americano/resultsAmericano')}`} to="/americano/resultsAmericano">
+                                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/americano/resultsAmericano')}`} to="/americano/resultsAmericano">
                                             Resultados
                                         </Link>
                                     </li>
@@ -178,17 +178,17 @@ function Header() {
                         </ul>
                     </li>
                     <li className="header__li">
-                        <Link className={`header__link ${isActive('/aboutus')}`} to="/aboutus">
+                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/aboutus')}`} to="/aboutus">
                             SOBRE NOSOTROS
                         </Link>
                     </li>
                     <li className="header__li">
-                        <Link className={`header__link ${isActive('/sponsors')}`} to="/sponsors">
+                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/sponsors')}`} to="/sponsors">
                             AUSPICIADORES
                         </Link>
                     </li>
                     <li className="header__li">
-                        <Link className={`header__link ${isActive('/contactus')}`} to="/contactus">
+                        <Link onClick={() => { setcloseMain(true) }} className={`header__link ${isActive('/contactus')}`} to="/contactus">
                             CONTACTANOS
                         </Link>
                     </li>

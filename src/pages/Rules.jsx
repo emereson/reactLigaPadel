@@ -36,7 +36,7 @@ const Rules = () => {
                             LUGAR: <p>{rulesEvent?.event.place}</p>
                         </li>
                         <li className="inscription__imgLi">
-                            FECHA DE INICIO : <p>{rulesEvent?.event.endDateEvent}</p>
+                            FECHA DE INICIO : <p>{rulesEvent?.event.startDateEvent}</p>
                         </li>
                         <li className='link__reglas' onClick={clickInscription}>inscribirme</li>
                     </ul>
