@@ -13,6 +13,7 @@
     "@emailjs/browser": "^3.11.0",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "emailjs": "^4.0.2",
     "mercadopago": "^1.5.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
