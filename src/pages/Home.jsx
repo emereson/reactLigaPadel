@@ -101,7 +101,7 @@ const Home = () => {
         const isInViewport = (element) => {
             const rect = element.getBoundingClientRect();
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            const topOffset = 50;
+            const topOffset = 5;
 
             return rect.top + topOffset < windowHeight;
         };
