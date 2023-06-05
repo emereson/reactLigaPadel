@@ -32,35 +32,6 @@ const Inscriptions = () => {
         const { RutPlayer1, RutPlayer2, discountCoupon } = data;
 
         // Función para validar el RUT
-        const isValidRut = (rut) => {
-            if (typeof rut !== 'string') {
-                return false;
-            }
-
-            const rutRegex = /^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$/;
-            if (!rutRegex.test(rut)) {
-                return false;
-            }
-            rut = rut.replace(/\./g, '').replace(/-/g, '');
-            const verificationDigit = rut.slice(-1);
-            const rutNumber = rut.slice(0, -1);
-            let sum = 0;
-            let multiplier = 2;
-
-            for (let i = rutNumber.length - 1; i >= 0; i--) {
-                sum += parseInt(rutNumber.charAt(i)) * multiplier;
-                multiplier = multiplier === 7 ? 2 : multiplier + 1;
-            }
-
-            const expectedDigit = 11 - (sum % 11);
-            const calculatedDigit = expectedDigit === 11 ? '0' : expectedDigit === 10 ? 'K' : expectedDigit.toString();
-
-            return verificationDigit === calculatedDigit;
-        };
-        if (isValidRut(RutPlayer1) || isValidRut(RutPlayer2)) {
-            alert('Uno de los RUT ingresados no es válido.');
-            return;
-        }
 
         if (
             [
@@ -264,7 +235,9 @@ const Inscriptions = () => {
                                 {...register('RutPlayer1')}
                                 id="RutPlayer1"
                                 required
-                                placeholder="Rut:"
+                                minLength="10"
+                                maxLength="10"
+                                placeholder="Rut:12345678-1"
                             />
                         </div>
                         <div className="inscription__div1">
@@ -772,7 +745,9 @@ const Inscriptions = () => {
                                 {...register('RutPlayer2')}
                                 id="RutPlayer2"
                                 required
-                                placeholder="Rut :"
+                                minLength="10"
+                                maxLength="10"
+                                placeholder="Rut : 12345678-5"
                             />
                         </div>
                         <div className="inscription__div1">

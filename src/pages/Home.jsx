@@ -117,13 +117,12 @@ const Home = () => {
         <div className='home__container' >
             <div className='home__img'>
                 <span></span>
-                <img src="../homePadel.png" alt="" />
+                <img src="../cancha.jpeg" alt="" />
                 <div className='home__title'>
                     <div className='home__title-text'>
-                        <h3>LIGA DE  PADEL </h3>
+                        <h3>LIGA OFICIAL DE  PADEL </h3>
                         <h1>CURAUMA</h1>
                         <h4>BY GREENPRO</h4>
-                        <h2>CHILE 2023</h2>
                     </div>
                 </div>
                 {
