@@ -42,7 +42,7 @@ const Home = () => {
 
     const handleNext = () => {
         setImgSelected(imgSelected + 1)
-        if (imgSelected > allEvents?.results) {
+        if (imgSelected > allEvents?.results - allEvents?.results) {
             setImgSelected(0)
         }
 
@@ -57,10 +57,16 @@ const Home = () => {
 
     const handleNextSponsor = () => {
         setImgSelectedSponsor(imgSelectedSponsor + 1)
-        if (imgSelectedSponsor > homeSponsors?.results) {
+        if (imgSelectedSponsor > homeSponsors?.results - homeSponsors?.results) {
             setImgSelectedSponsor(0)
         }
     };
+    setTimeout(function () {
+        setImgSelectedSponsor(imgSelectedSponsor + 1)
+        if (imgSelectedSponsor > homeSponsors?.results - homeSponsors?.results) {
+            setImgSelectedSponsor(0)
+        }
+    }, 2500);
 
 
     const [isCardEventVisible, setIsCardEventVisible] = useState(false);

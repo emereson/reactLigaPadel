@@ -6,7 +6,7 @@ const CardHomeGallery = ({ homeGallery }) => {
 
     const styleMovent = {
         transform: `translateX(calc(-${imgSelected}/1* 100%))`,
-        transition: `0.7s`,
+        transition: `1s`,
     }
 
     const handlePrevius = () => {
@@ -18,7 +18,7 @@ const CardHomeGallery = ({ homeGallery }) => {
     }
     const handleNext = () => {
         setimgSelected(imgSelected + 1)
-        if (imgSelected > homeGallery.galleryImgs.length) {
+        if (imgSelected > homeGallery.galleryImgs.length - homeGallery.galleryImgs.length) {
             setimgSelected(0)
         }
     }
