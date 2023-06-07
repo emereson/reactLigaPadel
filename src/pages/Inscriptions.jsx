@@ -6,9 +6,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import './pageStyles/inscriptionStyle.css';
 import io from 'socket.io-client'
 import emailjs from '@emailjs/browser';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 const Inscriptions = () => {
     const { id } = useParams();
@@ -83,8 +80,7 @@ const Inscriptions = () => {
                 .post(url, data)
                 .then((res) => {
                     console.log(res.data);
-                    toast.success('Registro exitoso');
-                    window.location.reload();
+                    alert('registro exitoso');
                 })
                 .catch((err) => console.log(err));
 
@@ -103,8 +99,11 @@ const Inscriptions = () => {
                 .post(url, requestData)
                 .then((res) => {
                     console.log(res.data);
-                    res.data.free === 240529815613 ? validNopay() : ''
-                    window.open(res.data.preferenceId.body.init_point, '_blank');
+                    if (res.data.free === 240529815613) {
+                        validNopay();
+                    } else {
+                        window.open(res.data.preferenceId.body.init_point, '_blank');
+                    }
                 })
                 .catch((err) => console.log(err));
 
@@ -128,19 +127,19 @@ const Inscriptions = () => {
 
         socket.on('validPay', (alldata) => {
             if (alldata.data === 'approved') {
-                emailJsNotificaion();
+                emailJsNotificaion()
 
                 const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
                 axios
                     .post(url, data)
                     .then((res) => {
                         console.log(res.data);
-                        toast.success('Registro exitoso'); // Mostrar notificación de éxito
                         setButtonDisabled(false);
-                        window.location.reload();
+                        alert('registro exitoso');
                     })
                     .catch((err) => console.log(err));
             }
+            reset(defaultValues);
             socket.off('validPay');
         });
 
@@ -195,7 +194,6 @@ const Inscriptions = () => {
                     </ul>
                 </div>
             </div>
-            <ToastContainer />
             <form className="inscription__form" ref={formRef} onSubmit={handleSubmit(submit)}>
                 <h2>INSCRIBIRME</h2>
                 <div className="register__container">
