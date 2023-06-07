@@ -6,6 +6,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import './pageStyles/inscriptionStyle.css';
 import io from 'socket.io-client'
 import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Inscriptions = () => {
     const { id } = useParams();
@@ -80,7 +83,7 @@ const Inscriptions = () => {
                 .post(url, data)
                 .then((res) => {
                     console.log(res.data);
-                    alert('registro exitoso');
+                    toast.success('Registro exitoso');
                     window.location.reload();
                 })
                 .catch((err) => console.log(err));
@@ -125,14 +128,14 @@ const Inscriptions = () => {
 
         socket.on('validPay', (alldata) => {
             if (alldata.data === 'approved') {
-                emailJsNotificaion()
+                emailJsNotificaion();
 
                 const url = `${import.meta.env.VITE_URL_API}/api/v1/inscription/${id}`;
                 axios
                     .post(url, data)
                     .then((res) => {
                         console.log(res.data);
-                        alert('registro exitoso');
+                        toast.success('Registro exitoso'); // Mostrar notificación de éxito
                         setButtonDisabled(false);
                         window.location.reload();
                     })
@@ -192,6 +195,7 @@ const Inscriptions = () => {
                     </ul>
                 </div>
             </div>
+            <ToastContainer />
             <form className="inscription__form" ref={formRef} onSubmit={handleSubmit(submit)}>
                 <h2>INSCRIBIRME</h2>
                 <div className="register__container">
