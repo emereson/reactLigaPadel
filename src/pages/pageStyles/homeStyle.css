@@ -117,7 +117,7 @@
   z-index: 10;
   margin-bottom: -6em;
   min-width: 350px;
-  width: 50%;
+  width: 57em;
   max-width: 1700px;
   display: flex;
   background-color: rgb(255, 255, 255);
@@ -545,11 +545,19 @@
     font-size: 5em;
   }
   .homeSponsor__container {
-    display: none;
+    width: 26.5em;
+    top: 42%;
+  }
+  .cardHomeSponsor__containerImg {
+    height: 5em;
+    width: 5em;
+  }
+  .allDiv__btn {
+    font-size: 1.8em;
   }
   .cardEvent__container {
     height: 100%;
-    padding-top: 2em;
+    padding-top: 3em;
   }
   .cardEvent__container2 {
     position: unset;
@@ -582,5 +590,16 @@
   }
   .cardHomeGalery__Img {
     width: 19.35em;
+  }
+}
+
+@media (max-width: 700px) {
+  .homeSponsor__container {
+    width: 22em;
+    top: 45%;
+  }
+  .cardHomeSponsor__containerImg {
+    height: 4.1em;
+    width: 4.1em;
   }
 }
