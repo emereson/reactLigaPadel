@@ -546,7 +546,7 @@
   }
   .homeSponsor__container {
     width: 26.5em;
-    top: 42%;
+    top: 45%;
   }
   .cardHomeSponsor__containerImg {
     height: 5em;
@@ -596,7 +596,7 @@
 @media (max-width: 700px) {
   .homeSponsor__container {
     width: 22em;
-    top: 45%;
+    top: 46%;
   }
   .cardHomeSponsor__containerImg {
     height: 4.1em;
