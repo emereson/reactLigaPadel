@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import defaultValues from '../../utils/defaultValues';
@@ -6,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import './pageStyles/inscriptionStyle.css';
 import io from 'socket.io-client'
 import emailjs from '@emailjs/browser';
+import axios from 'axios';
 
 const Inscriptions = () => {
     const { id } = useParams();
@@ -26,7 +26,7 @@ const Inscriptions = () => {
             .catch((err) => console.log(err));
     }, []);
 
-    const socket = io('https://king-prawn-app-hankr.ondigitalocean.app')
+    const socket = io('http://localhost:3001')
 
     const submit = (data) => {
         const { RutPlayer1, RutPlayer2, discountCoupon } = data;
@@ -102,7 +102,7 @@ const Inscriptions = () => {
                     if (res.data.free === 240529815613) {
                         validNopay();
                     } else {
-                        window.open(res.data.preferenceId.body.init_point, '_blank');
+                        window.open(res.data.preferenceId.body.init_point);
                     }
                 })
                 .catch((err) => console.log(err));
